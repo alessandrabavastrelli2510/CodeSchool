@@ -10,7 +10,7 @@ public class Student {
     private String name;
     private String lastname;
     private ArrayList<Exam> transcript;
-    private static HashMap<Integer,Student> students=new HashMap();
+    //private static HashMap<Integer,Student> students=new HashMap();
     //private static final int MAX_AGE=30; //la final non può cambiare valore 
 
     public Student(String name, String lastname){
@@ -18,20 +18,28 @@ public class Student {
         this.name=name;
         this.lastname=lastname;
         this.transcript=new ArrayList<>();
-        students.put(id,this);
+        //students.put(id,this);////////////
     }
     public static void addStudentToCourse(HashMap<Integer,Course> courses,int courseId){
         for(Integer key: courses.keySet()){
             if(key==courseId){
                Course c= courses.get(key);
-               students=c.getHashMapStudent();
-               Student student=new Student(askStudentName(),askStudentLastname());
-               students.put(idGenerator,student);
+               HashMap<Integer,Student> students=c.getHashMapStudent();
+               Student student=Student.createStudent();
+                if(Course.isStudentInCourse(student)){
+                    return;
+                } else {
+                    students.put(idGenerator, student);
+                }
+                 
             }
+             
+               
+         }
 
-        } 
+    } 
             
-    }
+    /////in course qui è quello corretto quello sopra
     public static String askStudentName(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Inserisci il nome dello studente che vuoi inserire");
@@ -44,15 +52,16 @@ public class Student {
         String lastname=scanner.nextLine();
         return lastname;
     }
-    // public static Student createStudent(){
-    //     Scanner scanner=new Scanner(System.in);
-    //     System.out.println("Inserisci il nome dello studente che vuoi inserire");
-    //     String name=scanner.nextLine();
-    //     System.out.println("Inserisci il cognome dello studente che vuoi inserire");
-    //     String lastname=scanner.nextLine();
-    //     Student studentToAdd=new Student(name,lastname);
-    //     return studentToAdd;
-    // }
+    public static Student createStudent(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Inserisci il nome dello studente che vuoi inserire");
+        String name=scanner.nextLine();
+        System.out.println("Inserisci il cognome dello studente che vuoi inserire");
+        String lastname=scanner.nextLine();
+        Student studentToAdd=new Student(name,lastname);
+        return studentToAdd;
+    }
+    //se lo studente è nel corso non torni lo studente 
     public int getStudentIdFromUtent(){
             System.out.println("Inserisci l'id dello studente desiderato");
             Scanner scanner=new Scanner(System.in);
@@ -60,23 +69,27 @@ public class Student {
             return StudentIdFromUtent;
     }
     
-    public int calculateAverage(){
-        int courseId=Course.getCourseIdFromUtent();
-        int studentId=getStudentIdFromUtent();
-        for(Integer key: students.keySet()){
-            if(key==id){
-               Course c= courses.get(key);
-               ArrayList <Student> list=c.getCourseStudentList();
-               for(Student s:list){
-                System.out.println(s);
-               }
-            }
-        }
+    // public int calculateAverage(){
+    //     int courseId=Course.getCourseIdFromUtent();
+    //     int studentId=getStudentIdFromUtent();
+    //     for(Integer key: students.keySet()){
+    //         if(key==id){
+    //            Course c= courses.get(key);
+    //            ArrayList <Student> list=c.getCourseStudentList();
+    //            for(Student s:list){
+    //             System.out.println(s);
+    //            }
+    //         }
+    //     }
 
 
-    }
+    // }
+    
     public String getFullName(){
         return name+" "+lastname;
+    }
+    public int getId(){
+        return id;
     }
 
 }

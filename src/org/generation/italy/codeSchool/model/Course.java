@@ -96,9 +96,26 @@ public class Course {
             }
         }
     }
+    
     public HashMap<Integer,Student> getHashMapStudent(){
         return students;
     }
+    public static boolean isStudentInCourse(Student student){
+       return students.containsKey(student.getId());
+    }
+    public static void addStudentToCourse(HashMap<Integer,Course> courses,int courseId){
+        Course c= courses.get(courseId);
+        if(c==null){
+            return;
+        }
+        Student student=new Student(Student.askStudentName(),Student.askStudentLastname());
+        HashMap<Integer,Student> students=c.getHashMapStudent();
+        students.put(student.getId(),student);
+    } 
+            
+
+    
+
     public static void main(String[] args) {
         Course.createCourse();
         Course.createCourse();
@@ -107,5 +124,7 @@ public class Course {
         Student.addStudentToCourse(courses,idToRegisterStudent);
         Course.readStudentList();
     }
+  
+
 }
 
