@@ -10,6 +10,7 @@ package org.generation.italy.codeSchool;
 
 public class Start {
     public static void main(String[] args) {
-    
+        
+        createAndAddCourse(c1);
     }
 }

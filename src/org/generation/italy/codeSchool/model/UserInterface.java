@@ -14,12 +14,17 @@ public class UserInterface {
         do {
             switch (choice) {
                 case 1: 
+                Course.printCourseList();
                     break;
                 case 2:
+                Course.createCourse();
                     break;
                 case 3:
+                Course.readStudentList();
                     break;
                 case 4:
+                int idToRegisterStudent=Course.getCourseIdFromUtent();
+                Student.addStudentToCourse(courses,idToRegisterStudent);
                     break;
                 case 5:
                     break;
@@ -40,6 +45,8 @@ public class UserInterface {
             Inserisci 3 per vedere gli studenti iscritti ad un corso in base all'id "
             Inserisci 4 per iscrivere un nuovo studente ad un corso in base all'id "
             Inserisci 5 per ricevere la media dei voti di uno studente in un corso in base all'id utente e id corso;
+            Inserisci -1 per uscire;
+
                 """);
     }
     
